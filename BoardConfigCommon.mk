@@ -137,6 +137,9 @@ endif
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# RIL
+ENABLE_VENDOR_RIL_SERVICE := true
+
 # SELinux
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(COMMON_PATH)/sepolicy/private
