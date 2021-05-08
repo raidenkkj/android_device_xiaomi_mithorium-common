@@ -163,7 +163,7 @@ endif
 
 # SELinux
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(VENDOR_PATH)/sepolicy/vendor
 
 # Treble
 PRODUCT_FULL_TREBLE_OVERRIDE := true
