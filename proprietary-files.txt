@@ -515,8 +515,10 @@ vendor/lib64/vendor.qti.hardware.alarm@1.0.so|78f8db9acff8b3461d6d37c747b1bdb59e
 -sbin/charger:bin/chargeonlymode|da39a3ee5e6b4b0d3255bfef95601890afd80709
 
 # QMI - from Daisy QKQ1.191002.002 V11.0.5.0.QDLMIXM
+etc/permissions/privapp-permissions-qti.xml
 etc/permissions/qti_libpermissions.xml|593bcb72cce68ceb0a70f50bcae7d460114e7c62
 etc/permissions/qti_permissions.xml|e6ff4572352b1a4f91b6b9d7cbb1cad9924410a0
+etc/sysconfig/qti_whitelist.xml
 vendor/bin/irsc_util|07f4a90a0fb528c5b883a6865184c7d7239e213d
 vendor/lib/libdiag.so|9dbf63722cba2b473429eeac2690e5d7c0bd2754
 vendor/lib/libdsutils.so|acabab426e7db861d9f7381e36bf3534da4d70f0
@@ -556,6 +558,7 @@ vendor/lib64/libqmi_encdec.so|be78c960990258d4f2db25d9c9727740fe20a2b0
 -product/app/QtiTelephonyService/QtiTelephonyService.apk|db60b6fe27b3033f6468b3170b23af18dd0bcdaf
 product/etc/permissions/embms.xml|5589ed8da213acd27e2ad2109094561eb1be30a7
 product/etc/permissions/qcrilhook.xml|ceb890ab3c1645aa0d0044abab1ba58c4097a991
+product/etc/permissions/telephony_product_privapp-permissions-qti.xml
 product/etc/permissions/telephonyservice.xml|a39eefcaf85fb8da60044fdbbcfddd95deb031c8
 product/framework/embmslibrary.jar|00eb5b4144f001423032a88cc1d227b3655db88b
 product/framework/qcrilhook.jar|99c85f639bdf74b6779607f1f29628c33d4edc85
