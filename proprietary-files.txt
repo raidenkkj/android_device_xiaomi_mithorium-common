@@ -466,6 +466,7 @@ vendor/etc/perf/perfboostsconfig.xml|429d7e2032a494eff1f8d0c039fa839082145b59
 vendor/etc/perf/perfconfigstore.xml|207ff980c296f4935928dd2f06e085b33bf59755
 vendor/etc/perf/targetconfig.xml|aa20c25397df1455206965737f82d44d44430e45
 vendor/etc/perf/targetresourceconfigs.xml|d9f9815764725df55e748bf4af4829e609dac853
+vendor/etc/msm_irqbalance.conf
 vendor/lib/libperfconfig.so|11f6ec2d7da51872dad2f016a6638df209adca14
 vendor/lib/libperfgluelayer.so|5c9db256d92ddf5bce65941f2cad5eaeb4f028fd
 vendor/lib/libqti-perfd-client.so|a6ddd909d581fbb5d8caa2f1f489ec5c2c5789c1
@@ -520,6 +521,7 @@ etc/permissions/qti_libpermissions.xml|593bcb72cce68ceb0a70f50bcae7d460114e7c62
 etc/permissions/qti_permissions.xml|e6ff4572352b1a4f91b6b9d7cbb1cad9924410a0
 etc/sysconfig/qti_whitelist.xml
 vendor/bin/irsc_util|07f4a90a0fb528c5b883a6865184c7d7239e213d
+vendor/etc/sec_config
 vendor/lib/libdiag.so|9dbf63722cba2b473429eeac2690e5d7c0bd2754
 vendor/lib/libdsutils.so|acabab426e7db861d9f7381e36bf3534da4d70f0
 vendor/lib/libidl.so|e8aaba37dbfc7f90032a4a4fe534743685e1b540
