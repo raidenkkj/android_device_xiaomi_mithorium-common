@@ -420,6 +420,7 @@ vendor/lib64/liblistenjni.so|4814b09f1d0c8d17516d1c6df7687b992311a884
 vendor/lib64/liblistensoundmodel2.so|13b37cbd54943834676872f534e6a51505bbcea7
 
 # Media - from Daisy QKQ1.191002.002 V11.0.5.0.QDLMIXM
+vendor/etc/seccomp_policy/mediacodec.policy
 vendor/lib/libI420colorconvert.so|0dfd4d0e49f4250e98e781483048a296a679e05e
 vendor/lib/libmmosal_proprietary.so|4b0788590e1ecfccd3b20b3181a4add528acb2b6
 vendor/lib/libOmxAacDec.so|55772a6d0cf3e6a5a2c32348fd7096b8737d490b
