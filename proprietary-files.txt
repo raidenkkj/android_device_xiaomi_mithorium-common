@@ -709,6 +709,7 @@ vendor/lib64/vendor.qti.imsrtpservice@2.1.so|6dbe703a5a8389c342008c950aaec7a3a26
 
 # Sensors
 vendor/bin/sensors.qti
+vendor/etc/sensors/hals.conf
 vendor/lib/hw/activity_recognition.msm8953.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
