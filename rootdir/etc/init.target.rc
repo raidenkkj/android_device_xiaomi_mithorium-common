@@ -91,7 +91,7 @@ on post-fs-data
     chmod 0755 mnt/vendor/persist/camera
 
 #start camera server as daemon
-service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
+service vendor.qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
@@ -609,3 +609,8 @@ service closead /system/vendor/bin/displayf_bin s 0
 
 on property:sys.hq.ad=0
     start closead
+
+# Restart camera provider after vendor.qcamerasvr is running
+on property:init.svc.vendor.qcamerasvr=running
+    exec /bin/sleep 1s
+    restart vendor.camera-provider-2-4
