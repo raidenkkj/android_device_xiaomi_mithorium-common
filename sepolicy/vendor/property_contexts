@@ -4,7 +4,9 @@ persist.net.doxlat         u:object_r:vendor_xlat_prop:s0
 camera.dual.mode           u:object_r:camera_prop:s0
 persist.camera.            u:object_r:camera_prop:s0
 persist.vendor.camera.     u:object_r:camera_prop:s0
-vendor.camera.             u:object_r:camera_prop:s0
+
+# Camera
+vendor.camera.lowpower.record.enable	u:object_r:camera_prop:s0
 
 # Wifi
 vendor.wlan.driver.ath	u:object_r:vendor_wifi_version:s0
