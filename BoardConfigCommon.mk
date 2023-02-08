@@ -27,12 +27,15 @@ BUILD_BROKEN_DUP_RULES := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
-BOARD_KERNEL_CMDLINE += androidboot.usbconfigfs=true
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci loop.max_part=7
+BOARD_KERNEL_CMDLINE += androidboot.usbconfigfs=true androidboot.init_fatal_reboot_target=recovery printk.devkmsg=on
+BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0
+ifeq ($(TARGET_BOARD_PLATFORM),msm8953)
+BOARD_KERNEL_CMDLINE += earlycon=msm_serial_dm,0x78af000
+endif
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8953
 TARGET_KERNEL_CLANG_COMPILE := true
 
 # ANT
@@ -62,7 +65,7 @@ BOARD_USES_ALSA_AUDIO := true
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8953
+TARGET_BOOTLOADER_BOARD_NAME := $(TARGET_BOARD_PLATFORM)
 TARGET_NO_BOOTLOADER := true
 
 # Bluetooth
@@ -95,21 +98,34 @@ TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
+ifneq ($(TARGET_HAS_NO_CONSUMERIR),true)
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/manifest/consumerir.xml
+endif
+ifneq ($(TARGET_EXCLUDE_CRYPTFSHW),true)
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/manifest/cryptfshw.xml
+endif
+ifneq ($(TARGET_USES_DEVICE_SPECIFIC_GATEKEEPER),true)
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/manifest/gatekeeper.xml
+endif
+ifneq ($(TARGET_USES_DEVICE_SPECIFIC_KEYMASTER),true)
+DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/manifest/keymaster.xml
+endif
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
 
 # HW crypto
+ifneq ($(TARGET_EXCLUDE_CRYPTFSHW),true)
 TARGET_HW_DISK_ENCRYPTION := true
+endif
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):init_xiaomi_mithorium
-TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_mithorium
+TARGET_INIT_VENDOR_LIB ?= //$(COMMON_PATH):init_xiaomi_mithorium
+TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_mithorium
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
+TARGET_COPY_OUT_VENDOR := vendor
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_ROOT_EXTRA_SYMLINKS := \
@@ -122,7 +138,6 @@ TARGET_USES_INTERACTION_BOOST := true
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_BOARD_PLATFORM := msm8953
 
 # Properties
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop

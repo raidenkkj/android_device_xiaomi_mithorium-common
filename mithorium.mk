@@ -6,6 +6,16 @@
 
 TARGET_USES_XIAOMI_MITHORIUM_COMMON_TREE := true
 
+# Platform
+TARGET_BOARD_PLATFORM ?= msm8937
+
+ifeq ($(TARGET_BOARD_PLATFORM),msm8953)
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.hardware.activity_recognition=msm8937 \
+    ro.hardware.sound_trigger=msm8937 \
+    vendor.opengles.version=196610
+endif
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
@@ -17,7 +27,7 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREF_CONFIG ?= xhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -27,7 +37,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -54,6 +63,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.print.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.print.xml
 
+ifneq ($(TARGET_HAS_NO_CONSUMERIR),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
+endif
+
 # ANT
 PRODUCT_PACKAGES += \
     AntHalService \
@@ -72,7 +86,7 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.1-impl \
     audio.a2dp.default \
     audio.bluetooth.default \
-    audio.primary.msm8953 \
+    audio.primary.$(TARGET_BOARD_PLATFORM) \
     audio.r_submix.default \
     audio.usb.default \
     libaudioroute \
@@ -105,6 +119,13 @@ PRODUCT_PACKAGES += \
     libstdc++.vendor \
     Snap
 
+# Consumer IR
+ifneq ($(TARGET_HAS_NO_CONSUMERIR),true)
+MITHORIUM_PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl \
+    android.hardware.ir@1.0-service
+endif
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
@@ -114,10 +135,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    copybit.msm8953 \
-    gralloc.msm8953 \
-    hwcomposer.msm8953 \
-    memtrack.msm8953 \
+    copybit.$(TARGET_BOARD_PLATFORM) \
+    gralloc.$(TARGET_BOARD_PLATFORM) \
+    hwcomposer.$(TARGET_BOARD_PLATFORM) \
+    memtrack.$(TARGET_BOARD_PLATFORM) \
     libdisplayconfig \
     libqdMetaData.system \
     libgenlock \
@@ -139,9 +160,11 @@ PRODUCT_PACKAGES += \
     libfmjni
 
 # Gatekeeper HAL
+ifneq ($(TARGET_USES_DEVICE_SPECIFIC_GATEKEEPER),true)
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
+endif
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -168,8 +191,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.device@1.0
 
 # HW crypto
+ifneq ($(TARGET_EXCLUDE_CRYPTFSHW),true)
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee
+endif
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -182,15 +207,17 @@ PRODUCT_PACKAGES += \
     IPACM_cfg.xml
 
 # Keymaster HAL
+ifneq ($(TARGET_USES_DEVICE_SPECIFIC_KEYMASTER),true)
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
+endif
 
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
     android.hardware.light@2.0-service \
-    lights.msm8953
+    lights.$(TARGET_BOARD_PLATFORM)
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
@@ -305,7 +332,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    thermal.msm8953
+    thermal.$(TARGET_BOARD_PLATFORM)
 
 PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \
@@ -318,7 +345,7 @@ PRODUCT_PACKAGES += \
 
 # VR
 PRODUCT_PACKAGES += \
-    vr.msm8953
+    vr.$(TARGET_BOARD_PLATFORM)
 
 PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-impl \
