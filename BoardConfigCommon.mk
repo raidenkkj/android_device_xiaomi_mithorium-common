@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-COMMON_PATH := device/xiaomi/msm8953-common
+COMMON_PATH := device/xiaomi/mithorium-common
 
 # APEX
 OVERRIDE_TARGET_FLATTEN_APEX := true
@@ -101,8 +101,8 @@ DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):init_xiaomi_msm8953
-TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_msm8953
+TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):init_xiaomi_mithorium
+TARGET_RECOVERY_DEVICE_MODULES := init_xiaomi_mithorium
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -163,4 +163,4 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
-include vendor/xiaomi/msm8953-common/BoardConfigVendor.mk
+include vendor/xiaomi/mithorium-common/BoardConfigVendor.mk
