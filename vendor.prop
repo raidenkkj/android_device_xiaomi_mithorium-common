@@ -161,3 +161,6 @@ persist.vendor.usb.config.extra=none
 
 # Wifi
 wifi.interface=wlan0
+
+# Zygote preforking
+persist.device_config.runtime_native.usap_pool_enabled=true
