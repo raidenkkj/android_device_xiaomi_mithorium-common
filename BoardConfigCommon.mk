@@ -121,9 +121,6 @@ endif
 TARGET_INIT_VENDOR_LIB ?= //$(COMMON_PATH):init_xiaomi_mithorium
 TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_mithorium
 
-# Lights
-TARGET_PROVIDES_LIBLIGHT := true
-
 # Partitions
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
@@ -144,11 +141,6 @@ TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
 # Recovery
-ifeq ($(AB_OTA_UPDATER), true)
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab_AB.recovery.qcom
-else
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.recovery.qcom
-endif
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
