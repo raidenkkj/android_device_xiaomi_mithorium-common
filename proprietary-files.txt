@@ -415,11 +415,6 @@ vendor/bin/energy-awareness
 vendor/bin/hw/vendor.qti.hardware.perf@2.0-service
 vendor/bin/msm_irqbalance
 vendor/etc/init/vendor.qti.hardware.perf@2.0-service.rc
-vendor/etc/perf/commonresourceconfigs.xml
-vendor/etc/perf/perfboostsconfig.xml
-vendor/etc/perf/perfconfigstore.xml
-vendor/etc/perf/targetconfig.xml
-vendor/etc/perf/targetresourceconfigs.xml
 vendor/etc/msm_irqbalance.conf
 vendor/lib/libperfconfig.so
 vendor/lib/libperfgluelayer.so
@@ -593,23 +588,18 @@ vendor/radio/qcril_database/upgrade/6_version_update_ecc_table.sql
 # Radio - IMS - from Daisy QKQ1.191002.002 V11.0.5.0.QDLMIXM
 system/etc/permissions/com.qualcomm.qti.imscmservice.xml
 -product/app/imssettings/imssettings.apk
--product/app/uceShimService/uceShimService.apk
 product/etc/permissions/com.qualcomm.qti.imscmservice-V2.0-java.xml
 product/etc/permissions/com.qualcomm.qti.imscmservice-V2.1-java.xml
 product/etc/permissions/com.qualcomm.qti.imscmservice-V2.2-java.xml
 product/framework/com.qualcomm.qti.imscmservice-V2.0-java.jar
 product/framework/com.qualcomm.qti.imscmservice-V2.1-java.jar
 product/framework/com.qualcomm.qti.imscmservice-V2.2-java.jar
-product/framework/com.qualcomm.qti.uceservice-V2.0-java.jar
-product/framework/com.qualcomm.qti.uceservice-V2.1-java.jar
 product/framework/vendor.qti.ims.callinfo-V1.0-java.jar
 product/framework/vendor.qti.ims.rcsconfig-V1.0-java.jar
 product/lib64/com.qualcomm.qti.imscmservice@1.0.so
 product/lib64/com.qualcomm.qti.imscmservice@2.0.so
 product/lib64/com.qualcomm.qti.imscmservice@2.1.so
 product/lib64/com.qualcomm.qti.imscmservice@2.2.so
-product/lib64/com.qualcomm.qti.uceservice@2.0.so
-product/lib64/com.qualcomm.qti.uceservice@2.1.so
 product/lib64/lib-imscamera.so
 product/lib64/lib-imsvideocodec.so
 product/lib64/lib-imsvt.so
