@@ -1,6 +1,6 @@
-#!/system/bin/sh
+#! /vendor/bin/sh
 
-# Copyright (c) 2018, The Linux Foundation. All rights reserved.
+# Copyright (c) 2014, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -29,44 +29,29 @@
 #
 #
 
-DEST_PATH="/data/vendor/wifi"
-FILES_MOVED="/data/vendor/wifi/moved"
-SRC_PATH="/data/misc/wifi"
+dir0=/data
+trigger_file=$dir0/ims_disabled
+ims_disabled=`getprop persist.vendor.ims.disabled`
+target=`getprop ro.build.product`
 
-function copy_file() {
-    echo "=== Copying $1 to $2 ..."
-    if [ ! -f "$1" ]
-    then
-        echo "    return as $1 not exist";
-        return;
-    fi
+#if [ ! -e $trigger_file ]; then
+#   for future use in doing conditional debugging
+#else
+#
+#fi
+echo "$ims_disabled"
+echo "$target"
 
-    if [ ! -d "$2" ]
-    then
-        echo "    dest path is not exist, making dir $2";
-        mkdir -p $2 -m 700
-    fi
+if [ "$ims_disabled" = "0" ]; then
+    echo "ims will be enabled"
+    setprop vendor.service.qti.ims.enabled 1
+    exit
+fi
 
-    if [ ! -d "$2" ]
-    then
-        echo "    mkdir failed"
-        return;
-    fi
-
-    echo "    copied $1 success"
-    cp $1 $2
-}
-
-if [ ! -f "$FILES_MOVED" ]; then
-    copy_file "$SRC_PATH/p2p_supplicant.conf" "$DEST_PATH/wpa/"
-    copy_file "$SRC_PATH/hostapd.accept"      "$DEST_PATH/hostapd/"
-    copy_file "$SRC_PATH/hostapd.deny"        "$DEST_PATH/hostapd/"
-
-    find $DEST_PATH -print0 | while IFS= read -r -d '' file
-         do
-             chgrp wifi "$file"
-             echo "    chgrp wifi $file"
-         done
-    restorecon -R "$DEST_PATH"
-    echo 1 > "$FILES_MOVED"
+if [ "$ims_disabled" = "1" ] || [ "$target" = "msm8909_512" ]; then
+    echo "ims is disabled"
+    setprop vendor.service.qti.ims.enabled 0
+else
+    echo "ims is enabled"
+    setprop vendor.service.qti.ims.enabled 1
 fi
